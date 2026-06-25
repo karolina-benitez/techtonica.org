@@ -295,6 +295,135 @@ def render_admin_dashboard_page():
     return render_template("admin_dashboard.html")
 
 
+SAMPLE_APPLICANTS = [
+    {
+        "id": 1,
+        "name": "Jane Doe",
+        "email": "jane.doe@example.com",
+        "eligibility_score": 90,
+        "status": "Eligible",
+        "date_submitted": "2025-01-15",
+        "details": {
+            "wpm_score": 55,
+            "wpm_accuracy": "85%",
+            "two_references": True,
+            "freecodecamp_complete": True,
+            "gender": "Non-binary",
+            "computer_literate": "Yes",
+            "recent_bootcamp": "No",
+            "stable_housing": "Yes",
+        },
+        "admin_notes": [
+            "Follow-up required after interview.",
+            "Strong technical background",
+            "Needs financial assistance verification",
+        ],
+    },
+    {
+        "id": 2,
+        "name": "John Smith",
+        "email": "john.smith@example.com",
+        "eligibility_score": 75,
+        "status": "Eligible",
+        "date_submitted": "2025-01-12",
+        "details": {
+            "wpm_score": 52,
+            "wpm_accuracy": "82%",
+            "two_references": True,
+            "freecodecamp_complete": False,
+            "gender": "Woman",
+            "computer_literate": "Yes",
+            "recent_bootcamp": "No",
+            "stable_housing": "Yes",
+        },
+        "admin_notes": [
+            "Pending reference check.",
+            "Good problem-solving skills",
+            "Completed take-home challenge successfully",
+        ],
+    },
+    {
+        "id": 3,
+        "name": "Alice Johnson",
+        "email": "alice.johnson@example.com",
+        "eligibility_score": 45,
+        "status": "Ineligible",
+        "date_submitted": "2025-01-10",
+        "details": {
+            "wpm_score": 30,
+            "wpm_accuracy": "70%",
+            "two_references": False,
+            "freecodecamp_complete": False,
+            "gender": "Woman",
+            "computer_literate": "No",
+            "recent_bootcamp": "Yes",
+            "stable_housing": "No",
+        },
+        "admin_notes": [
+            "Did not meet eligibility requirements.",
+            "Incomplete application",
+            "Short-form ineligible criteria flagged",
+        ],
+    },
+    {
+        "id": 4,
+        "name": "Bob Williams",
+        "email": "bob.williams@example.com",
+        "eligibility_score": 60,
+        "status": "Pending",
+        "date_submitted": "2025-01-18",
+        "details": {
+            "wpm_score": 50,
+            "wpm_accuracy": "80%",
+            "two_references": False,
+            "freecodecamp_complete": False,
+            "gender": "Non-binary",
+            "computer_literate": "Yes",
+            "recent_bootcamp": "No",
+            "stable_housing": "Yes",
+        },
+        "admin_notes": [
+            "Awaiting staff interview.",
+            "Great enthusiasm for program",
+            "Awaiting final eligibility review",
+        ],
+    },
+    {
+        "id": 5,
+        "name": "Chris Adams",
+        "email": "chris.adams@example.com",
+        "eligibility_score": 50,
+        "status": "Manual Review Needed",
+        "date_submitted": "2025-01-20",
+        "details": {
+            "wpm_score": 49,
+            "wpm_accuracy": "78%",
+            "two_references": False,
+            "freecodecamp_complete": False,
+            "gender": "Man",
+            "computer_literate": "Yes",
+            "recent_bootcamp": "No",
+            "stable_housing": "Yes",
+        },
+        "admin_notes": [
+            "Requires additional financial documents.",
+            "Income verification pending",
+            "Needs further assessment for eligibility",
+        ],
+    },
+]
+
+
+@app.route("/admin/applicant/<int:applicant_id>")
+def render_applicant_view(applicant_id):
+    applicant = next(
+        (a for a in SAMPLE_APPLICANTS if a["id"] == applicant_id), None
+    )
+    if applicant is None:
+        return "Applicant not found", 404
+    return render_template("admin_applicant_view.html", applicant=applicant)
+
+
 def get_events():
     try:
         group_id = eventbrite.get_user()["id"]

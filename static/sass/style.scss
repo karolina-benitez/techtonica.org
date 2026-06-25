@@ -1914,3 +1914,138 @@ progress::-webkit-progress-bar {
     }
   }
 }
+
+/* ---------- Individual Applicant View ---------- */
+
+.applicant-view {
+  &__back {
+    display: inline-block;
+    margin-bottom: 0.5em;
+    font-size: 0.9rem;
+    color: $main-blue;
+
+    &:hover {
+      color: $light-blue;
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1em;
+  }
+
+  &__header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1em;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.5em;
+
+    .admin-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__status {
+    font-size: 0.9rem;
+
+    &--eligible {
+      color: rgb(0, 98, 24);
+      background-color: rgb(155, 255, 180);
+    }
+
+    &--ineligible {
+      color: rgb(138, 0, 25);
+      background-color: rgb(252, 202, 211);
+    }
+
+    &--pending {
+      color: rgb(0, 58, 108);
+      background-color: rgb(155, 225, 255);
+    }
+
+    &--manual-review-needed {
+      color: rgb(204, 150, 0);
+      background-color: rgb(252, 237, 140);
+    }
+  }
+
+  &__score-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4em;
+    margin-bottom: 1em;
+  }
+
+  &__score {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $dark-blue;
+  }
+
+  &__criteria {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__criterion {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5em;
+    padding: 0.5em 0;
+    border-bottom: 1px solid #eee;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &--pass {
+      color: rgb(0, 98, 24);
+    }
+
+    &--fail {
+      color: rgb(138, 0, 25);
+    }
+
+    &--warn {
+      color: rgb(204, 150, 0);
+    }
+  }
+
+  &__details {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.4em 1.5em;
+    margin: 0;
+
+    dt {
+      color: gray;
+      font-weight: 600;
+    }
+
+    dd {
+      margin: 0;
+    }
+  }
+
+  &__notes {
+    padding-left: 1.2em;
+
+    li {
+      margin-bottom: 0.5em;
+    }
+  }
+}
+
+.main-content:has(.applicant-view) {
+  margin-top: 0;
+}
