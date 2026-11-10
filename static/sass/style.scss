@@ -172,6 +172,9 @@
       color: $white;
       text-decoration: none;
 
+    a#success-container {
+      color: $black;
+    }
       &:hover {
         text-decoration: underline;
       }
